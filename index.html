@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Video Choice</title>
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+        <script>
+            AFRAME.registerComponent('play-pause-1', {
+                init: function () {
+                    //get the video elem. in html
+                    var myVideo = document.querySelector('#training');
+                    //get the img button in html
+                    var button = document.querySelector('#button-1');
+
+                    var doors = document.querySelector('#sky');
+
+                    var initScene = document.querySelector('#init-scene');
+                    var sceneVid1 = document.querySelector('#scene-vid-1');
+
+
+                    this.el.addEventListener('click', function() {
+                       
+                        if (initScene.object3D.visible){
+                        
+                            myVideo.play();
+       
+                            initScene.setAttribute('visible', false);
+                            sceneVid1.setAttribute('visible', true);
+                            return;
+
+                        }  
+                        if (sceneVid1.object3D.visible){
+                            myVideo.pause();
+
+                            initScene.setAttribute('visible', true);
+                            sceneVid1.setAttribute('visible', false);
+                            return;
+                           
+                        }
+                    }//event listener
+                    );
+                }//function
+
+            });
+
+            AFRAME.registerComponent('play-pause-2', {
+                init: function () {
+                    //get the video elem. in html
+                    var myVideo = document.querySelector('#office');
+                    //get the img button in html
+                    var button = document.querySelector('#button-2');
+
+                    var doors = document.querySelector('#sky');
+
+                    var initScene = document.querySelector('#init-scene');
+                    var sceneVid2 = document.querySelector('#scene-vid-2');
+
+
+                    this.el.addEventListener('click', function() {
+                       
+                        if (initScene.object3D.visible){
+                        
+                            myVideo.play();
+       
+                            initScene.setAttribute('visible', false);
+                            sceneVid2.setAttribute('visible', true);
+                            return;
+                        }
+                        if (sceneVid2.object3D.visible){
+                            myVideo.pause();
+
+                            initScene.setAttribute('visible', true);
+                            sceneVid2.setAttribute('visible', false);
+                            return;
+                           
+                        }
+                    }//event listener
+                    );
+                }//function
+
+            });
+        </script>
+
+    </head>
+    <body>
+        
+        <a-scene>
+            <a-assets>
+                <img id= "doors" src="img/doors-2.png">
+                <img id= "greenb" src="img/button-green.png">
+                <img id= "blueb" src="img/button-blue.png">
+                <img id= "close" src="img/x.png">
+                <video id="office" src="vid/office.mp4" loop = "true"></video>
+                <video id="training" src="vid/training.mp4" loop = "true" ></video>
+            </a-assets>
+
+            <a-camera>
+                <a-cursor></a-cursor>
+                
+            </a-camera>
+
+
+
+        <a-entity id="init-scene" visible="true">
+            <a-sky id="sky" src="#doors" visible="true" radius="5000" rotation="0 4 0"></a-sky>
+            <a-image id="button-1" src="#greenb" position="-1 0 -5" play-pause-1></a-image>
+            <a-image id="button-2" src="#blueb" position="1 0 -5" play-pause-2></a-image> 
+        </a-entity>
+
+        <a-entity id="scene-vid-1" visible="false">
+            <a-videosphere src="#training" visible="true" radius="100"></a-videosphere>
+            <a-image id="button-close-1" src="#close" position="-1 0 -5" play-close-1></a-image>
+        </a-entity>
+
+        <a-entity id="scene-vid-2" visible="false">
+            <a-videosphere src="#office" visible="true" radius="100"></a-videosphere>
+            <a-image id="button-close-2" src="#close" position="1 0 -5" play-close-2></a-image>
+        </a-entity>
+
+
+           
+            
+         
+            
+
+            <!-- <a-image id="blue-button" src="#blueb" position="0 0 5"></a-image>  -->
+
+            
+
+        </a-scene>
+    </body>
+</html>
